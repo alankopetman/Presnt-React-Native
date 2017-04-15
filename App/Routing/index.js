@@ -1,10 +1,10 @@
 import React from 'react';
-import { 
+import {
 	StyleSheet,
 	Text,
 	View,
 	TextInput,
-	TouchableOpacity 
+	TouchableOpacity
 } from 'react-native';
 import {
   NativeRouter,
@@ -24,9 +24,7 @@ import {
 	Settings,
 } from '../Components';
 import { AppHeader } from '../Resources';
-import { authRoutes, anonRoutes } from './routes';
 import styles from './styles';
-import { baseStyles, colors } from '../Styles';
 
 class Router extends React.Component {
   constructor(props) {
@@ -54,20 +52,20 @@ class Router extends React.Component {
 					this.props.user ? (
 						<View style={styles.container}>
 							<View style={styles.header} />
-							<Route 
-								exact path="/courses" 
+							<Route
+								exact path="/courses"
 								component={Courses}
 								{...this.props}
 							/>
 
-							<Route 
-								exact path="/dashboard" 
+							<Route
+								exact path="/dashboard"
 								component={DashBoard}
 								{...this.props}
 							/>
 
-							<Route 
-								exact path="/settings" 
+							<Route
+								exact path="/settings"
 								component={Settings}
 								{...this.props}
 							/>
@@ -135,8 +133,8 @@ class Router extends React.Component {
 								{...this.props}
 								loginHandler={this.loginSubmitHandler}
 							 />
-							<Route 
-								exact path="/register" 
+							<Route
+								exact path="/register"
 								component={Registration}
 								{...this.props}
 								loginHandler={this.loginSubmitHandler}
