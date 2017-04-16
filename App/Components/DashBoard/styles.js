@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../Styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,9 @@ const styles = StyleSheet.create({
   },
 
   text: {
+		flex: 1,
     color: 'black',
+		textAlign: 'center',
   },
 
 	button: {
@@ -18,8 +21,7 @@ const styles = StyleSheet.create({
 		height: 100,
 		borderWidth: 1,
 		borderColor: 'white',
-		backgroundColor: 'black',
-		color: 'white',
+		backgroundColor: colors.primary
 	},
 
 	image: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Alert,
   Text,
   TextInput,
   TouchableOpacity,
@@ -40,11 +41,25 @@ class Registration extends Component {
     this.props.register(firstName, lastName, pid, email, password, passwordConf);
   }
 
+	componentWillReceiveProps(nextProps){
+		if(nextProps.errors) 
+			this.registrationFailureAlert(nextProps);
+	}
+	
+	registrationFailureAlert = ({errors}) => {
+		let errorToShow = '';
+		for(let error in errors){
+			if(errors[error] !== undefined)
+				errorToShow = errors[error];
+		}
+		return Alert.alert('Invalid Credentials', errorToShow[0]);
+	}
+
+
   render() {
     return (
 			<View style={styles.container}>
-				<ScrollView contentContainerStyle={styles.container}>
-					<KeyboardAvoidingView style={styles.inputContainer} behavior="padding">
+					<KeyboardAvoidingView style={styles.inputContainer} >
 						<AuthInput
 							onChangeText={(firstName) => this.setState({firstName})}
 							value={this.state.firstName}
@@ -84,14 +99,27 @@ class Registration extends Component {
 							placeholder="confirm password"
 							secureTextEntry
 						/>
+						<AuthButton
+							onPress={() => {
+							if(this.state.password != this.state.passwordConf) {
+								Alert.alert('Invalid Credentials', 'Passwords do not match');
+							} else {
+									this.register(this.state)
+								}
+							}}
+							title="REGISTER"
+							disabled={!(
+								this.state.email && 
+								this.state.password &&
+								this.state.passwordConf &&
+								this.state.pid &&
+								this.state.firstName &&
+								this.state.lastName
+							)}
+							accessabilityLabel="Button for registering"
+							color="white"
+						/>
 					</KeyboardAvoidingView>
-				</ScrollView>
-				<AuthButton
-					onPress={() => {this.register(this.state)}}
-					title="REGISTER"
-					accessabilityLabel="Button for registering"
-					color="white"
-				/>
 			</View>
     );
   }
@@ -106,5 +134,10 @@ export default connect((state) => {
     token: state.setUser.token,
     user: state.setUser.user,
 		prof: state.setUser.prof,
+		errors: {
+			email: state.setFailure.email,
+			password: state.setFailure.password,
+			other: state.setFailure.other,
+		}
   }
 }, mapStateToProps)(Registration);

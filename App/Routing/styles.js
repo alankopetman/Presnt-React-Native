@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		height: 50,
 		backgroundColor: colors.navBar,
-		borderColor: 'black',
+		borderColor: colors.navBarBorder,
 		borderTopWidth: StyleSheet.hairlineWidth,
 		bottom: 0,
 		width: '100%',
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
 	tempText: {
 		height: '50%',
 		textAlign: 'center',
+		color: colors.darkBlue,
 	},
 
 	navButton: {

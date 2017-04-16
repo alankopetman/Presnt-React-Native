@@ -39,6 +39,10 @@ class Router extends React.Component {
     console.log(this);
 	}
 
+	setActiveStyles(path) {
+		this.state.path = path;
+	}
+
   render() {
     const RoutesWithSubRoutes = (route) => (
       <Route path={route.path} render={props => (
@@ -73,7 +77,8 @@ class Router extends React.Component {
 							<View style={styles.navContainer}>
 								<Link
 									to="/courses"
-									underlayColor="blue"
+									component={TouchableOpacity}
+									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
 										<Text style={styles.tempIcon}>🙏</Text>
@@ -83,7 +88,8 @@ class Router extends React.Component {
 
 								<Link
 									to="/dashboard"
-									underlayColor="blue"
+									component={TouchableOpacity}
+									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
 										<Text style={styles.tempIcon}>💩</Text>
@@ -93,7 +99,8 @@ class Router extends React.Component {
 
 								<Link
 									to="/settings"
-									underlayColor="blue"
+									component={TouchableOpacity}
+									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
 										<Text style={styles.tempIcon}>🔥</Text>

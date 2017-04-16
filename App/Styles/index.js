@@ -2,11 +2,14 @@ import { StyleSheet } from 'react-native';
 
 const colors = {
   primary: '#65C5FF',
+	darkBlue: '#0076FF',
   light: '#D6D6D6',
   medLight: '#979797',
   background: '#F0F0F0',
   backgroundLight: 'white',
 	navBar: '#FAFAFA',
+	navBarBorder: '#B2B2B2',
+	inactivePrimary: '#A0C8E1',
 }
 
 const baseStyles = StyleSheet.create({

@@ -26,6 +26,7 @@ function mapStateToProps(state) {
 	return {
 		token: state.setUser.token,
 		user: state.setUser.user,
+		prof: state.setUser.prof,
 	};
 }
 

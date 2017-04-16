@@ -24,7 +24,7 @@ export default AppHeader;
 
 const styles = StyleSheet.create({
   container: {
-    height: '30%',
+		height: '25%',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',

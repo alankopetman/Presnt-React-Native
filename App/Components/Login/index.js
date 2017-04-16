@@ -32,15 +32,29 @@ class Login extends Component {
   }
 
 	componentDidMount(){
-    console.log(this);
+		//    console.log(this);
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.errors) 
+			this.loginFailureAlert(nextProps);
+	}
+	
+	loginFailureAlert = ({errors}) => {
+		let errorToShow = '';
+		for(let error in errors){
+			if(errors[error] !== undefined)
+				errorToShow = errors[error];
+		}
+		return Alert.alert('Invalid Credentials', errorToShow[0]);
 	}
 
 	handleInput = (type, input) => {
 		this.setState({ [type]: input});
 	}
 
-  loginSubmit = ({email, password}) => {
-    this.props.loginRequest(email, password);
+	loginSubmit = ({email, password}) => {
+		this.props.loginRequest(email, password);
   }
 
   render() {
@@ -62,16 +76,17 @@ class Login extends Component {
             onChangeText={(password) => this.setState({password})}
           />
 
+					<AuthButton
+						onPress={() => {
+							this.loginSubmit(this.state)
+							}
+						}
+						disabled={!(this.state.email && this.state.password)}
+						title="LOGIN"
+						accessabilityLabel="Button for logging in"
+						color="white"
+					/>
         </KeyboardAvoidingView>
-        <AuthButton
-          onPress={() => {
-            this.loginSubmit(this.state)
-            }
-          }
-          title="LOGIN"
-          accessabilityLabel="Button for logging in"
-          color="white"
-        />
       </View>
  )
   }
@@ -87,5 +102,10 @@ export default connect((state) => {
     token: state.setUser.token,
     user: state.setUser.user,
 		prof: state.setUser.prof,
+		errors: {
+			email: state.setFailure.email,
+			password: state.setFailure.password,
+			other: state.setFailure.other,
+		}
   }
 }, mapStateToProps)(Login);

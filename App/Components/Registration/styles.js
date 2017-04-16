@@ -4,6 +4,9 @@ const styles = StyleSheet.create({
 	container: {
     flex: 1,
     paddingBottom: 50,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
 	},
 
   contentContainer: {
@@ -18,6 +21,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     marginTop: 25,
+		width: '100%',
     alignItems: 'center',
   },
 

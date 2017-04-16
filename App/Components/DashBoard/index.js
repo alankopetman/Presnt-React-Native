@@ -5,7 +5,7 @@ import {
   View,
   Text,
 	TouchableHighlight,
-	Image,
+	TouchableOpacity,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { ActionCreators }from '../../Actions';
@@ -20,14 +20,12 @@ class DashBoard extends Component {
   render() {
     return (
         <View style={styles.container}>
-        	<Text style={styles.text}>I'm the DashBoard component</Text>
-					<View style={styles.button}>
-						<TouchableHighlight
-							onPress={() => {console.log("create new course")}}
-						>
-							<Image style={ styles.image } source={{ uri: 'http://www.free-avatars.com/data/media/37/cat_avatar_0597.jpg' }} /> 
-						</TouchableHighlight>
-					</View>
+					<Text style={styles.text}>I'm the DashBoard component</Text>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={() => {console.log("create new course")}}
+					>
+					</TouchableOpacity>
         </View>
     );
   }
