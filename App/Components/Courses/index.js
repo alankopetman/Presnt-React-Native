@@ -8,16 +8,18 @@ import {
 import { bindActionCreators } from 'redux';
 import { ActionCreators }from '../../Actions';
 import { connect } from 'react-redux';
-
+import ClassBar from '../../Resources/ClassBar';
 import styles from './styles';
 
 class Courses extends Component {
   componentDidMount() {
-    console.log(this)  
+    console.log(this)
   }
   render() {
     return (
-        <Text style={styles.text}>I'm the Courses component</Text>
+      <View style={styles.container}>
+        <ClassBar />
+      </View>
     );
   }
 }

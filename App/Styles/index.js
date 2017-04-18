@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const colors = {
-  primary: '#65C5FF',
-	darkBlue: '#0076FF',
-  light: '#D6D6D6',
-  medLight: '#979797',
+	primary: '#65C5FF',		//Primary Light Blue
+	darkBlue: '#0076FF',	//Darker Blue (for 'links')
+	lightText: '#7E7D81',	//Light color for text (in between very light and dark)
+  medLightText: '#979797',
+	darkText: 'black',
+	light: '#D6D6D6',			
   background: '#F0F0F0',
   backgroundLight: 'white',
 	navBar: '#FAFAFA',

@@ -11,6 +11,10 @@ import {
 import { colors } from '../Styles';
 
 export default class AuthInput extends React.Component {
+	constructor(props){
+		super(props);
+		console.log(props)
+	}
 	componentDidMount(){
 		console.log("component mounted")
 	}
