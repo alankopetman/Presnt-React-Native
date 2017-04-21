@@ -9,20 +9,20 @@ import {
   KeyboardAvoidingView,
 	ScrollView,
 } from 'react-native';
-import { Redirect } from 'react-router-native';
-
 import {
   AuthInput,
   AuthButton,
   SubHeaderLabel,
   AppHeader,
 } from '../../Resources';
+import Swiper from 'react-native-swiper';
+import { Redirect } from 'react-router-native';
+import { ActionCreators }from '../../Actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators }from '../../Actions';
-
 import styles from './styles';
-import {baseStyles, colors} from '../../Styles';
+import { icons } from '../../Styles';
+
 
 class Registration extends Component {
   constructor(props) {
@@ -59,66 +59,78 @@ class Registration extends Component {
   render() {
     return (
 			<View style={styles.container}>
-					<KeyboardAvoidingView style={styles.inputContainer} >
-						<AuthInput
-							onChangeText={(firstName) => this.setState({firstName})}
-							value={this.state.firstName}
-							placeholder="first name"
-						/>
-				
-						<AuthInput
-							onChangeText={(lastName) => this.setState({lastName})}
-							value={this.state.lastName}
-							placeholder="last name"
-						/>
-				
-						<AuthInput
-							onChangeText={(email) => this.setState({email})}
-							value={this.state.email}
-							placeholder="email"
-							keyboardType="email-address"
-						/>
-				
-						<AuthInput
-							onChangeText={(pid) => this.setState({pid})}
-							value={this.state.pid}
-							placeholder="Panther ID"
-							keyboardType="number-pad"
-						/>
-				
-						<AuthInput
-							onChangeText={(password) => this.setState({password})}
-							value={this.state.password}
-							placeholder="password"
-							secureTextEntry
-						/>
-				
-						<AuthInput
-							onChangeText={(passwordConf) => this.setState({passwordConf})}
-							value={this.state.passwordConf}
-							placeholder="confirm password"
-							secureTextEntry
-						/>
-						<AuthButton
-							onPress={() => {
-							if(this.state.password != this.state.passwordConf) {
-								Alert.alert('Invalid Credentials', 'Passwords do not match');
-							} else {
-									this.register(this.state)
-								}
-							}}
-							title="REGISTER"
-							disabled={!(
-								this.state.email && 
-								this.state.password &&
-								this.state.passwordConf &&
-								this.state.pid &&
-								this.state.firstName &&
-								this.state.lastName
-							)}
-							accessabilityLabel="Button for registering"
-							color="white"
-						/>
+					<KeyboardAvoidingView behavior="padding" style={styles.inputContainer} >
+						<Swiper 
+							showsButtons
+							loop={false}
+							prevButton={icons.leftArrow}
+							nextButton={icons.rightArrow}
+							buttonWrapperStyle={styles.swipeControl}
+						>
+							<View style={styles.swipeContainer}>
+								<AuthInput
+									onChangeText={(firstName) => this.setState({firstName})}
+									value={this.state.firstName}
+									placeholder="first name"
+								/>
+								
+								<AuthInput
+									onChangeText={(lastName) => this.setState({lastName})}
+									value={this.state.lastName}
+									placeholder="last name"
+								/>
+							</View>
+
+							<View style={styles.swipeContainer}>
+								<AuthInput
+									onChangeText={(email) => this.setState({email})}
+									value={this.state.email}
+									placeholder="email"
+									keyboardType="email-address"
+								/>
+								
+								<AuthInput
+									onChangeText={(pid) => this.setState({pid})}
+									value={this.state.pid}
+									placeholder="Panther ID"
+									keyboardType="number-pad"
+								/>
+								
+								<AuthInput
+									onChangeText={(password) => this.setState({password})}
+									value={this.state.password}
+									placeholder="password"
+									secureTextEntry
+								/>
+								
+								<AuthInput
+									onChangeText={(passwordConf) => this.setState({passwordConf})}
+									value={this.state.passwordConf}
+									placeholder="confirm password"
+									secureTextEntry
+								/>
+								<AuthButton
+									onPress={() => {
+									if(this.state.password != this.state.passwordConf) {
+										Alert.alert('Invalid Credentials', 'Passwords do not match');
+									} else {
+											this.register(this.state)
+										}
+									}}
+									title="REGISTER"
+									disabled={!(
+										this.state.email && 
+										this.state.password &&
+										this.state.passwordConf &&
+										this.state.pid &&
+										this.state.firstName &&
+										this.state.lastName
+									)}
+									accessabilityLabel="Button for registering"
+									color="white"
+								/>
+							</View>
+						</Swiper>
 					</KeyboardAvoidingView>
 			</View>
     );

@@ -11,6 +11,8 @@
     "react-native": "0.42.3",
     "react-native-animatable": "^1.1.1",
     "react-native-redux-router": "^1.0.7",
+    "react-native-swiper": "^1.5.4",
+    "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.4",
     "react-router-native": "^4.1.1"
   },

@@ -11,6 +11,7 @@ import {
   Route,
 	Link,
 	withRouter,
+	Redirect,
 } from 'react-router-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -108,6 +109,7 @@ class Router extends React.Component {
 									</View>
 								</Link>
 							</View>
+						<Redirect to="/dashboard" />
 						</View>
 						) : (
 						<View style={styles.container}>
@@ -146,6 +148,7 @@ class Router extends React.Component {
 								{...this.props}
 								loginHandler={this.loginSubmitHandler}
 							/>
+				<Redirect to="/login" />
 			</View>
 			)
 		)} />

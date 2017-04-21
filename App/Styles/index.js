@@ -1,4 +1,6 @@
+import React from 'react';
 import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const colors = {
 	primary: '#65C5FF',		//Primary Light Blue
@@ -41,4 +43,10 @@ const baseStyles = StyleSheet.create({
     borderBottomWidth: 20
   },
 });
-module.exports = { baseStyles, colors };
+
+const icons = {
+	rightArrow : (<Icon name="ios-arrow-forward" size={40} color={colors.light} />),
+	leftArrow : (<Icon name="ios-arrow-back" size={40} color={colors.light} />),
+};
+
+module.exports = { baseStyles, colors, icons };

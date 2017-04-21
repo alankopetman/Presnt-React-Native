@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../Styles';
 
 const styles = StyleSheet.create({
 	container: {
@@ -7,6 +8,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
+	},
+
+	swipeContainer: {
+		flex: 1,
+    alignItems: 'center',
+	},
+
+	swipeControl: {
+    alignItems: 'flex-start',
 	},
 
   contentContainer: {
@@ -30,6 +40,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+
+	slide1: {
+		alignItems: 'center',
+	},
+
+	slide2: {
+		alignItems: 'center',
+	},
+
+  buttonWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '70%',
+    borderRadius: 20,
+    backgroundColor: colors.primary,
+  },
+
+  button: {
+		height: 30,
+    backgroundColor: colors.primary,
+    color: 'white',
+  },
+
 });
 
 export default styles;
