@@ -12,9 +12,12 @@ import ClassBar from '../../Resources/ClassBar';
 import styles from './styles';
 
 class Courses extends Component {
+
   componentDidMount() {
-    console.log(this)
+		console.log(this);
+		this.props.routeTo(this.props.location.pathname);
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -25,11 +28,16 @@ class Courses extends Component {
 }
 
 function mapStateToProps(state) {
-	return {
-		token: state.setUser.token,
-		user: state.setUser.user,
+  return {
+    token: state.setUser.token,
+    user: state.setUser.user,
 		prof: state.setUser.prof,
-	};
+		path: state.setPath.path,
+  };
 }
 
-export default connect(mapStateToProps)(Courses);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);

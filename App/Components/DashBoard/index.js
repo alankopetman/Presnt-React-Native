@@ -14,9 +14,12 @@ import { connect } from 'react-redux';
 import styles from './styles';
 
 class DashBoard extends Component {
+
   componentDidMount() {
-    console.log(this)  
+		console.log(this);
+		this.props.routeTo(this.props.location.pathname);
   }
+
   render() {
     return (
         <View style={styles.container}>
@@ -30,13 +33,17 @@ class DashBoard extends Component {
     );
   }
 }
-
 function mapStateToProps(state) {
-	return {
-		token: state.setUser.token,
-		user: state.setUser.user,
+  return {
+    token: state.setUser.token,
+    user: state.setUser.user,
 		prof: state.setUser.prof,
-	};
+		path: state.setPath.path,
+  };
 }
 
-export default connect(mapStateToProps)(DashBoard);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

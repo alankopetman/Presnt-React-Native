@@ -106,6 +106,6 @@ export default connect((state) => {
 			email: state.setFailure.email,
 			password: state.setFailure.password,
 			other: state.setFailure.other,
-		}
+		},
   }
 }, mapStateToProps)(Login);

@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
 	navButton: {
 		flex: 1,
 		height: '100%',
+		alignItems: 'center',
 	},
 
   active: {

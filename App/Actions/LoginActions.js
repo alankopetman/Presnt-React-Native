@@ -1,5 +1,4 @@
 import * as types from './ActionTypes';
-import Api from '../lib/Api';
 import axios from 'react-native-axios';
 
 const axiosInstance = axios.create({

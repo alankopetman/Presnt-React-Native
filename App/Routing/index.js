@@ -26,6 +26,7 @@ import {
 } from '../Components';
 import { AppHeader } from '../Resources';
 import styles from './styles';
+import { icons } from '../Styles';
 
 class Router extends React.Component {
   constructor(props) {
@@ -40,17 +41,16 @@ class Router extends React.Component {
     console.log(this);
 	}
 
-	setActiveStyles(path) {
-		this.state.path = path;
+	componentWillUnmount() {
+    console.log(this.props);
+	}
+
+	setActive = (path, activeIcon, inactiveIcon) => {
+		return (this.props.route == path ?  
+			activeIcon : inactiveIcon)
 	}
 
   render() {
-    const RoutesWithSubRoutes = (route) => (
-      <Route path={route.path} render={props => (
-        <route.component {...props} routes={route.routes} />
-      )} />
-    );
-
     return (
       <NativeRouter>
 				<Route path="/" render={() => (
@@ -82,7 +82,11 @@ class Router extends React.Component {
 									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
-										<Text style={styles.tempIcon}>🙏</Text>
+										{this.setActive(
+											'/courses',
+											icons.coursesActive,
+											icons.coursesInactive
+										)}
 										<Text style={styles.tempText}>Courses</Text>
 									</View>
 								</Link>
@@ -93,7 +97,11 @@ class Router extends React.Component {
 									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
-										<Text style={styles.tempIcon}>💩</Text>
+										{this.setActive(
+											'/dashboard',
+											icons.homeActive,
+											icons.homeInactive
+										)}
 										<Text style={styles.tempText}>Home</Text>
 									</View>
 								</Link>
@@ -104,7 +112,11 @@ class Router extends React.Component {
 									activeOpacity={0.3}
 								>
 									<View style={styles.navButton}>
-										<Text style={styles.tempIcon}>🔥</Text>
+										{this.setActive(
+											'/settings',
+											icons.settingsActive,
+											icons.settingsInactive
+										)}
 										<Text style={styles.tempText}>Settings</Text>
 									</View>
 								</Link>
@@ -162,6 +174,7 @@ function mapStateToProps(state) {
     token: state.setUser.token,
     user: state.setUser.user,
 		prof: state.setUser.prof,
+		route: state.setPath.path,
   };
 }
 
