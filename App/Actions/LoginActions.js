@@ -53,13 +53,16 @@ export function register(firstName, lastName, pid, email, password, passwordConf
 export function loginRequest(email, password) {
   return (dispatch, getState) => {
 		const re = new RegExp('\(.*\)@.*');
-    axiosInstance.post('/api/auth/v2/login/', {
-			username: email.replace(re, '$1'),
+		const username = email.replace(re, '$1');
+		console.log(username);
+    axiosInstance.post('/api/auth/v2/login', {
+			username: username,
 			email: email,
       password: password,
     })
     .then((response) => {
 			const { data } = response;
+			console.log(response);
 			if(response.status < 400) {
 				dispatch(
 					loginSuccess({ 
@@ -69,7 +72,6 @@ export function loginRequest(email, password) {
 					})
 				)
 			} else {
-				//	console.log(data)
 				dispatch(
 					loginFailure({
 						password: data.password,
@@ -80,7 +82,7 @@ export function loginRequest(email, password) {
 			}
     })
     .catch((error) => {
-			//console.log(error)
+			console.log(error)
       dispatch(loginFailure(error))
     })
   }

@@ -7,9 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "15.4.2",
-    "react-native": "0.42.3",
+    "native-base": "^2.1.2",
+    "react": "^16.0.0-alpha.6",
+    "react-native": "^0.43.4",
+    "react-native-action-button": "^2.6.9",
     "react-native-animatable": "^1.1.1",
+    "react-native-animated-modal": "^1.1.0",
+    "react-native-datepicker": "^1.4.7",
+    "react-native-prefix-picker": "^2.0.2",
     "react-native-redux-router": "^1.0.7",
     "react-native-swiper": "^1.5.4",
     "react-native-vector-icons": "^4.0.1",

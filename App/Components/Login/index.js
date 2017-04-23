@@ -32,7 +32,7 @@ class Login extends Component {
   }
 
 	componentDidMount(){
-		//    console.log(this);
+		this.props.loginRequest('akope001@fiu.edu', 'pass1234');
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -62,14 +62,12 @@ class Login extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView style={styles.inputContainer} behavior="padding">
           <AuthInput
-            key={'email'}
             value={this.state.email}
             placeholder="email"
             onChangeText={(email) => this.setState({email})}
           />
 
           <AuthInput
-            key={'password'}
             value={this.state.password}
             placeholder="password"
             secureTextEntry

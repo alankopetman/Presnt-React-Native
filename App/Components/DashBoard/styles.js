@@ -25,11 +25,6 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.primary
 	},
 
-	image: {
-		height: 128,
-		width: 128,
-		borderRadius: 64,
-	}
 });
 
 export default styles;

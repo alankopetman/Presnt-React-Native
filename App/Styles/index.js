@@ -14,6 +14,8 @@ const colors = {
 	navBar: '#FAFAFA',
 	navBarBorder: '#B2B2B2',
 	inactivePrimary: '#A0C8E1',
+	modal: 'white',
+	fabIcon: 'white',
 }
 
 const baseStyles = StyleSheet.create({
@@ -53,6 +55,7 @@ const icons = {
 	coursesInactive : (<Icon name="ios-school-outline" size={25} color={colors.light} />),
 	settingsActive : (<Icon name="ios-settings" size={25} color={colors.darkBlue} />),
 	settingsInactive: (<Icon name="ios-settings-outline" size={25} color={colors.light} />),
+	add: (<Icon name="ios-add" size={25} color={colors.fabIcon} />),
 };
 
 module.exports = { baseStyles, colors, icons };

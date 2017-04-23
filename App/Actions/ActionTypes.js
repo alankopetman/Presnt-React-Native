@@ -15,8 +15,11 @@ function createRouteTypes(base) {
   [PATH].forEach(type => res[type] = `${base}_${type}`);
   return res;
 }
+
 // Login events
 export const LOGIN = createRequestTypes('LOGIN');
 export const LOGOUT = 'LOGOUT';
 
-export const ROUTE = createRouteTypes('ROUTE')
+export const ROUTE = createRouteTypes('ROUTE');
+export const COURSE = createRequestTypes('COURSE');
+export const SECTION = createRequestTypes('SECTION');

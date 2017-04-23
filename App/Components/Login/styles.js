@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     flex: 1,
+		width: '100%',
     marginTop: 25,
     alignItems: 'center',
   },

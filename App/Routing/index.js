@@ -54,7 +54,7 @@ class Router extends React.Component {
     return (
       <NativeRouter>
 				<Route path="/" render={() => (
-					!this.props.user ? (
+					this.props.user ? (
 						<View style={styles.container}>
 							<View style={styles.header} />
 							<Route

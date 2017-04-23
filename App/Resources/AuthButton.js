@@ -4,11 +4,11 @@ import React from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
 	Animated,
 	Easing,
 } from 'react-native';
+import { Button } from 'native-base';
 
 import { colors } from '../Styles';
 
@@ -52,9 +52,18 @@ class FadeInView extends React.Component {
 function AuthButton (props) {
   return (
 		<FadeInView disabled={props.disabled}>
-			<View style={styles.active}>
-				<Button style={styles.button} {...props} />
-			</View>
+			<Button
+				full
+				rounded 
+				style={{
+					backgroundColor: colors.primary,
+					width: '70%',
+					height: 40,
+				}} 
+				{...props}
+			>
+				<Text style={styles.buttonText}> {props.title} </Text>
+			</Button>
 		</FadeInView>
   );
 }
@@ -63,14 +72,13 @@ export default AuthButton;
 
 const styles = StyleSheet.create({
   active: {
+		flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '70%',
-    borderRadius: 20,
-    backgroundColor: colors.primary,
   },
-  button: {
-    backgroundColor: 'white',
-    color: 'white',
-  }
+	buttonText: {
+		flex: 1,
+		color: 'white',
+		textAlign: 'center',
+	}
 });

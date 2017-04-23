@@ -10,21 +10,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  child1: {
-    flex: 1,
-    backgroundColor: 'blue',
-    width: '100%'
-  },
-  child2: {
-    flex: 1,
-    backgroundColor: 'green',
-    width: '100%'
-  },
-  child3: {
-    flex: 2,
-    backgroundColor: 'red',
-    width: '100%'
-  },
+
+	fabWrapper: {
+		flex: 1,
+	},
+
+	modal: {
+		flex: 1,
+		backgroundColor: colors.modal,
+	},
+
+	modalText: {
+		color: colors.darkBlue,
+	},
+
+	spinnerContainer: {
+		flex: 1,
+		width: '100%',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 export default styles;

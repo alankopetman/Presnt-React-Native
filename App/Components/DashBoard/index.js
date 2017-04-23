@@ -6,6 +6,8 @@ import {
   Text,
 	TouchableHighlight,
 	TouchableOpacity,
+	Modal,
+	StatusBar,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { ActionCreators }from '../../Actions';
@@ -14,6 +16,12 @@ import { connect } from 'react-redux';
 import styles from './styles';
 
 class DashBoard extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isModalVisible: false,
+		};
+	}
 
   componentDidMount() {
 		console.log(this);
@@ -24,11 +32,6 @@ class DashBoard extends Component {
     return (
         <View style={styles.container}>
 					<Text style={styles.text}>I'm the DashBoard component</Text>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={() => {console.log("create new course")}}
-					>
-					</TouchableOpacity>
         </View>
     );
   }

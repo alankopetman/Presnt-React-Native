@@ -14,14 +14,14 @@ function ClassBar(props) {
     <View style={styles.container}>
       <View style={styles.courseLeftContainer}>
         <Text style={styles.courseLeftTextTop}>
-          COP 4110 UO1
+					{props.courseCode}
         </Text>
         <Text style={styles.courseLeftTextBottom}>
-					Class Size <Text style={styles.sizeText}> 32 </Text>
+					Class Size <Text style={styles.sizeText}> {props.classSize} </Text>
         </Text>
       </View>
       <View style={styles.courseRightContainer}>
-				<Text style={styles.courseRightText}>Tuesdays | Thursdays</Text>
+				<Text style={styles.courseRightText}>{props.classDayOne} | {props.classDayTwo}</Text>
 				<Text style={styles.courseRightText, styles.sizeText}>11:00 AM - 12:15 PM</Text>
       </View>
     </View>
