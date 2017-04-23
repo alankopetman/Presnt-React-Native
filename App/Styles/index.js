@@ -16,6 +16,7 @@ const colors = {
 	inactivePrimary: '#A0C8E1',
 	modal: 'white',
 	fabIcon: 'white',
+	remove: 'red',
 }
 
 const baseStyles = StyleSheet.create({
@@ -49,6 +50,7 @@ const baseStyles = StyleSheet.create({
 const icons = {
 	rightArrow : (<Icon name="ios-arrow-forward" size={40} color={colors.light} />),
 	leftArrow : (<Icon name="ios-arrow-back" size={40} color={colors.light} />),
+	downArrow : (<Icon name="ios-arrow-down" size={20} color={colors.light} />),
 	homeActive: (<Icon name="ios-home" size={25} color={colors.darkBlue} />),
 	homeInactive: (<Icon name="ios-home-outline" size={25} color={colors.light} />),
 	coursesActive: (<Icon name="ios-school" size={25} color={colors.darkBlue} />),
@@ -56,6 +58,9 @@ const icons = {
 	settingsActive : (<Icon name="ios-settings" size={25} color={colors.darkBlue} />),
 	settingsInactive: (<Icon name="ios-settings-outline" size={25} color={colors.light} />),
 	add: (<Icon name="ios-add" size={25} color={colors.fabIcon} />),
+	refresh: (<Icon name="ios-refresh" size={50} color={colors.darkBlue} />),
+	play: (<Icon name="ios-play-outline" size={100} color={colors.darkBlue} />),
+	remove: (<Icon name="ios-remove-circle-outline" size={25} color={colors.remove} />),
 };
 
 module.exports = { baseStyles, colors, icons };

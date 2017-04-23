@@ -25,7 +25,7 @@ export default class TimePicker extends Component {
         cancelBtnText="Cancel"
 				showIcon={false}
 				duration={10}
-				placeholder="Select a time"
+				placeholder={this.props.placeholder}
         customStyles={{
           dateInput: {
             marginLeft: 0,

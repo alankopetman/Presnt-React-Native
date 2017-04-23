@@ -7,9 +7,26 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     backgroundColor: colors.background,
+  },
+
+	header: {
+		backgroundColor: colors.primary,
+	},
+
+	actionButtonWrapper: {
+		position: 'absolute',
+		borderRadius: 28,
+		height: 56,
+		width: 56,
+		backgroundColor: colors.primary,
+		bottom: 0,
+		right: 0,
+	},
+
+	scrollStyles: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
+	},
 
 	fabWrapper: {
 		flex: 1,
@@ -18,6 +35,14 @@ const styles = StyleSheet.create({
 	modal: {
 		flex: 1,
 		backgroundColor: colors.modal,
+	},
+
+	notEditting: {
+		color: 'white',
+	},
+
+	editting: {
+		color: 'white',
 	},
 
 	modalText: {

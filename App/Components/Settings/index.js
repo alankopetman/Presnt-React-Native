@@ -5,9 +5,25 @@ import {
   View,
   Text,
 } from 'react-native';
+import { 
+	Container,
+	Content, 
+	Form, 
+	Input,
+	Button,
+	Header,
+	Left,
+	Right,
+	Body,
+	Title,
+	Spinner,
+	Item,
+	Picker,
+} from 'native-base';
 import { bindActionCreators } from 'redux';
 import { ActionCreators }from '../../Actions';
 import { connect } from 'react-redux';
+import { colors, icons } from '../../Styles';
 
 import styles from './styles';
 
@@ -21,7 +37,17 @@ class Settings extends Component {
   render() {
     return (
         <View style={styles.container}>
-        	<Text style={styles.text}>I'm the Settings component</Text>
+					<Header 
+						backgroundColor={colors.primary} 
+						style={{backgroundColor: colors.primary}}
+						iosBarStyle='light-content'
+					>
+						<Left/>
+						<Body>
+							<Title style={{color: 'white'}}>Settings</Title>
+						</Body>
+						<Right />
+					</Header>
         </View>
     );
   }

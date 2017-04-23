@@ -9,9 +9,39 @@ const axiosInstance = axios.create({
 	}
 });
 
+export function deleteSection(auth, sectionId) {
+	const { user, token } = auth;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
+	console.log(axiosInstance.defaults.headers.common['Authorization'])
+	return (dispatch, getState) => {
+		axiosInstance.delete(`/api/sections/${sectionId}/`)
+		.then((response) => {
+			const { data } = response;
+			if(response.status < 400) {
+				dispatch(
+					getSections({ 
+						user: user,
+						token: token,
+					})
+				)
+			} else {
+				dispatch(
+						sectionFailure({
+							data: data,
+					})
+				)
+			}
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+}
+
 export function createSection(auth, section) {
 	const { user, token } = auth;
-	axiosInstance.defaults.headers.common['Authorization'] = 'Token ' + token;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
+	console.log(axiosInstance.defaults.headers.common['Authorization'])
   return (dispatch, getState) => {
     console.log(getState());
 		axiosInstance.post('/api/sections/', {
@@ -19,6 +49,7 @@ export function createSection(auth, section) {
 			class_day_two: section.secondDay,
 			class_day_three: section.thirdDay,
 			class_time: section.classTime,
+			class_time_end: section.classTimeEnd,
 			room_size: section.roomSize,
 			room_number: section.roomNumber,
 			router: 'test_router',
@@ -52,7 +83,8 @@ export function createSection(auth, section) {
 
 export function getSections(auth) {
 	const { token, user } = auth;
-	axiosInstance.defaults.headers.common['Authorization'] = 'Token ' + token;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
+	console.log(axiosInstance.defaults.headers.common['Authorization'])
 	return (dispatch, getState) => {
 		axiosInstance.get('/api/sections/get_sections/')
 		.then((response) => {
@@ -76,7 +108,7 @@ export function getSections(auth) {
 
 export function getCourses(auth) {
 	const { token, user } = auth;
-	axiosInstance.defaults.headers.common['Authorization'] = 'Token ' + token;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
 	return (dispatch, getState) => {
 		axiosInstance.get(
 			'/api/courses/'

@@ -56,7 +56,6 @@ class Router extends React.Component {
 				<Route path="/" render={() => (
 					this.props.user ? (
 						<View style={styles.container}>
-							<View style={styles.header} />
 							<Route
 								exact path="/courses"
 								component={Courses}

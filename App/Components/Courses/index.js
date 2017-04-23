@@ -6,6 +6,7 @@ import {
   Text,
 	Modal,
 	StatusBar,
+	ScrollView,
 } from 'react-native';
 import { 
 	Container,
@@ -38,10 +39,12 @@ class Courses extends Component {
 		this.state = {
 			active: true,
 			isModalVisible: false,
+			editting: false,
 			firstDay: '',
 			secondDay: '',
 			thirdDay: '',
 			classTime: '',
+			classTimeEnd: '',
 			roomSize: 0,
 			sectionId: '',
 			roomNumber: 0,
@@ -59,6 +62,7 @@ class Courses extends Component {
 	_showModal = () => {
 		this.setState({ isModalVisible: true });
 	}
+	
 
 	_hideModal = () => {
 		this.setState({ isModalVisible: false });
@@ -68,128 +72,176 @@ class Courses extends Component {
 		this.setState({course});
 	}
 
-	_handleSubmit = ({active, isModalVisible, ...rest}) => {
-		const auth = {token: this.props.token, user: this.props.user}
-		console.log(rest)
-		this.props.createSection(auth, rest);
-	}
-
 	_setTime = (classTime) => {
 		this.setState({classTime})
 	}
 
+	_setTimeEnd = (classTimeEnd) => {
+		this.setState({classTimeEnd})
+	}
+
+	_createSection = ({active, isModalVisible, ...rest}) => {
+		const auth = {token: this.props.token, user: this.props.user}
+		this.props.createSection(auth, rest);
+	}
+
+	_deleteSection = (sectionId) => {
+		const auth = {token: this.props.token, user: this.props.user}
+		this.props.deleteSection(auth, sectionId);
+	};
 
   render() {
 		if(this.props.courses && this.props.sections) {
 			const Courses = this.props.courses.map((course, index) => {
 				return <Item value={course.id} label={course.course_id} key={index} />
 			});
-			console.log(this.props.sections)
 			const Sections = this.props.sections.map((section, index) => {
 				return (
 					<ClassBar 
-						classSize={sections.class_size} 
-						classDayOne={sections.class_day_one}
-						classDayTwo={sections.class_day_two}
+						key={index}
+						classCode={section.course_info.course_id}
+						classSize={section.room_size} 
+						classDayOne={section.class_day_one}
+						classDayTwo={section.class_day_two}
+						sectionId={section.id}
+						editMode={this.state.editting}
+						deleteSection={this._deleteSection}
 					/>
 				)
 			});
 			return (
 				<View style={styles.container}>
-					{Sections}
-					<Modal 
-						style={styles.modal} 
-						visible={this.state.isModalVisible}
-						animationType={"slide"}
+					<Header 
+						backgroundColor={colors.primary} 
+						style={{backgroundColor: colors.primary}}
+						iosBarStyle='light-content'
 					>
-							 <StatusBar barStyle="dark-content" />
-					<Header>
-						<Left>
-							<Button
-								onPress={this._hideModal}
-								transparent
-							>
-								<Text style={styles.modalText}>Cancel</Text>
-							</Button>
-						</Left>
+						<Left/>
 						<Body>
-							<Title>Create a Class</Title>
+							<Title style={{color: 'white'}}>Courses</Title>
 						</Body>
 						<Right>
 							<Button 
-								onPress={() =>{
-								this._handleSubmit(this.state)
-								this._hideModal()
-								}}
 								transparent
+								onPress={() =>{
+								this.state.editting ? 
+									this.setState({editting: false}) : this.setState({editting: true});
+								}}
 							>
-								<Text style={styles.modalText}>Submit</Text>
+								<Text 
+									style={this.state.editting ? styles.editting : styles.notEditting}
+								> {this.state.editting ? "Done" : "Edit"}</Text>
 							</Button>
 						</Right>
 					</Header>
-							<Form>
-								<Item>
-									<Input 
-										placeholder="Class day of week" 
-										onChangeText={(firstDay) => this.setState({firstDay})}
-									/>
-								</Item>
-								<Item>
-									<Input 
-										placeholder="Class day of week (optional)" 
-										onChangeText={(secondDay) => this.setState({secondDay})}
-									/>
-								</Item>
-								<Item>
-									<Input 
-										placeholder="Class day of week (optional)" 
-										onChangeText={(thirdDay) => this.setState({thirdDay})}
-									/>
-								</Item>
-								<Item>
-									<TimePicker _setTime={this._setTime} />
-								</Item>
-								<Item>
-									<Input 
-										placeholder="Room size" 
-										onChangeText={(roomSize) => this.setState({roomSize})}
-									/>
-								</Item>
-								<Item>
-									<Input 
-										placeholder="Room number" 
-										onChangeText={(roomNumber) => this.setState({roomNumber})}
-									/>
-								</Item>
-								<Item>
-									<Input 
-										placeholder="Section ID" 
-										onChangeText={(sectionId) => this.setState({sectionId})}
-									/>
-								</Item>
-								<Item last>
-									<Picker
-										iosHeader="Courses"
-										mode="dropdown"
-										selectedValue={this.state.course}
-										onValueChange={this._onValueChange}
-										textStyle={{color:colors.darkBlue, padding: 0 }}
-									>
-										{Courses}
-									</Picker>
-								</Item>
-							</Form>
-					</Modal>
-							<ActionButton
+					<ScrollView contentContainerStyle={styles.scrollStyles}>
+						{Sections}
+					</ScrollView>
+						<Modal 
+							style={styles.modal} 
+							visible={this.state.isModalVisible}
+							animationType={"slide"}
+						>
+								 <StatusBar barStyle="dark-content" />
+						<Header>
+							<Left>
+								<Button
+									onPress={this._hideModal}
+									transparent
+								>
+									<Text style={styles.modalText}>Cancel</Text>
+								</Button>
+							</Left>
+							<Body>
+								<Title>Create a Class</Title>
+							</Body>
+							<Right>
+								<Button 
+									onPress={() =>{
+									this._createSection(this.state)
+									this._hideModal()
+									}}
+									transparent
+								>
+									<Text style={styles.modalText}>Submit</Text>
+								</Button>
+							</Right>
+						</Header>
+								<Form>
+									<Item>
+										<Input 
+											placeholder="Class day of week" 
+											onChangeText={(firstDay) => this.setState({firstDay})}
+										/>
+									</Item>
+									<Item>
+										<Input 
+											placeholder="Class day of week (optional)" 
+											onChangeText={(secondDay) => this.setState({secondDay})}
+										/>
+									</Item>
+									<Item>
+										<Input 
+											placeholder="Class day of week (optional)" 
+											onChangeText={(thirdDay) => this.setState({thirdDay})}
+										/>
+									</Item>
+									<Item>
+										<TimePicker 
+											_setTime={this._setTime} 
+											placeholder="Select a start time"
+										/>
+									</Item>
+									<Item>
+										<TimePicker 
+											_setTime={this._setTimeEnd} 
+											placeholder="Select an end time"
+										/>
+									</Item>
+									<Item>
+										<Input 
+											placeholder="Room size" 
+											onChangeText={(roomSize) => this.setState({roomSize})}
+										/>
+									</Item>
+									<Item>
+										<Input 
+											placeholder="Room number" 
+											onChangeText={(roomNumber) => this.setState({roomNumber})}
+										/>
+									</Item>
+									<Item>
+										<Input 
+											placeholder="Section ID" 
+											onChangeText={(sectionId) => this.setState({sectionId})}
+										/>
+									</Item>
+									<Item last>
+										<Picker
+											iosHeader="Courses"
+											mode="dropdown"
+											selectedValue={this.state.course}
+											onValueChange={this._onValueChange}
+											textStyle={{color:colors.darkBlue, padding: 0 }}
+										>
+											{Courses}
+										</Picker>
+									</Item>
+								</Form>
+						</Modal>
+						{this.state.editting ? 
+							(<ActionButton
 								buttonColor={colors.primary}
 								onPress={this._showModal}
 								position="right"
 								offsetY={70}
 							>
-							</ActionButton>
+							</ActionButton>) :
+							(<View />)
+						}
 				</View>
 			);
-		} else return <Spinner />
+		} else return <Spinner color={colors.primary}/>
 	}
 }
 
