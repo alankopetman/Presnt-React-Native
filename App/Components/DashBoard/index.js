@@ -31,6 +31,9 @@ import { connect } from 'react-redux';
 import { colors, icons } from '../../Styles';
 import Label from '../../Resources/Label';
 import ClassCard from '../../Resources/ClassCard';
+import reactMixin from 'react-mixin';
+import TimerMixin from 'react-timer-mixin';
+
 
 import styles from './styles';
 
@@ -38,22 +41,31 @@ class DashBoard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isModalVisible: false,
-		};
+			curTime : new Date().toTimeString().slice(0,8)
+		}
 	}
 
   componentDidMount() {
-    setInterval( () => {
+		console.log('COMPONENT MOUNTED');
+    this.setInterval( () => {
       this.setState({
         curTime : new Date().toLocaleString()
       })
-    },30000)
+    },3000)
 		this.props.routeTo(this.props.location.pathname);
 		this.props.getSections({token: this.props.token, user: this.props.user});
   }
 
-	shouldClassStart = (time) => {
-		return Date.parse('01/01/2020 ' + time) > Date.parse('01/01/2020 ' + this.state.curTime)
+	componentDidUnount() {
+	}
+
+	shouldClassStart = (time, timeEnd) => {
+		const date = '01/01/2020';
+		return (
+			Date.parse(`${date} ${time}`) <= Date.parse(`${date} ${this.state.curTime}`)
+				&&
+			Date.parse(`${date} ${timeEnd}`) >= Date.parse(`${date} ${this.state.curTime}`)
+		)
 	}
 
   render() {
@@ -64,7 +76,7 @@ class DashBoard extends Component {
 						key={index}
 						classCode={section.course_info.course_id}
 						sectionId={section.section_id}
-						shouldClassStart={this.shouldClassStart(section.class_time)}
+						shouldClassStart={this.shouldClassStart(section.class_time, section.class_time_end)}
 					/>
 				)
 			});
@@ -104,4 +116,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
+reactMixin(DashBoard.prototype, TimerMixin);
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

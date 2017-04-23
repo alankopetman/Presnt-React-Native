@@ -62,7 +62,6 @@ class Courses extends Component {
 	_showModal = () => {
 		this.setState({ isModalVisible: true });
 	}
-	
 
 	_hideModal = () => {
 		this.setState({ isModalVisible: false });
@@ -103,7 +102,8 @@ class Courses extends Component {
 						classSize={section.room_size} 
 						classDayOne={section.class_day_one}
 						classDayTwo={section.class_day_two}
-						sectionId={section.id}
+						sectionId={section.section_id}
+						sid={section.id}
 						editMode={this.state.editting}
 						deleteSection={this._deleteSection}
 					/>

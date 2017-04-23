@@ -17,7 +17,7 @@ function ClassBar(props) {
 			<TouchableOpacity style={styles.container}>
 				<View style={styles.courseLeftContainer}>
 					<Text style={styles.courseLeftTextTop}>
-						{props.classCode}
+						{props.classCode}&nbsp;{props.sectionId}
 					</Text>
 					<Text style={styles.courseLeftTextBottom}>
 						Class Size <Text style={styles.sizeText}> {props.classSize} </Text>
@@ -36,7 +36,7 @@ function ClassBar(props) {
 							[
 								{ text: 'Cancel', onPress: () => console.log('canceled') },
 								{ text: 'Delete', onPress: () => {
-								props.deleteSection(props.sectionId)} }
+								props.deleteSection(props.sid)} }
 							]
 						)}
 						style={styles.editting}>
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
   },
 
   courseLeftContainer: {
-		flex: 2,
+		flex: 4,
   },
 
 	courseRightContainer: {
-		flex: 3,
+		flex: 5,
 		flexDirection: 'row',
 	},
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
   courseLeftTextTop: {
     color: 'black',
-		fontSize: 23,
+		fontSize: 20,
     paddingTop: 18,
     paddingLeft: 20,
   },

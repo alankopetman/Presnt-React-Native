@@ -11,7 +11,7 @@ import {
 import {baseStyles, colors, icons} from '../Styles';
 
 function Label(props) {
-	console.log(props)
+	console.log(props);
   return (
     <View style={styles.container}>
 			<View style={styles.leftContainer}>
@@ -19,9 +19,10 @@ function Label(props) {
 			</View>
 			<View style={styles.rightContainer}>
 				<Text style={styles.text}>7:00 AM - 8:15 AM</Text>
-				<TouchableOpacity style={styles.downArrow}>
+				{props.shouldClassStart ? 
+				(<TouchableOpacity style={styles.downArrow}>
 					<Text style={styles.startText}> Start </Text>
-				</TouchableOpacity>
+				</TouchableOpacity>) : (<View />)}
 			</View>
     </View>
 )}

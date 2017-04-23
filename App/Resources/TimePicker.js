@@ -20,7 +20,7 @@ export default class TimePicker extends Component {
         date={this.state.date}
         mode="time"
         placeholder="select date"
-        format="LT"
+        format="HH:mm:ss"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
 				showIcon={false}
