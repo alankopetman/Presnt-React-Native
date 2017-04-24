@@ -49,18 +49,22 @@ class DashBoard extends Component {
 		console.log('COMPONENT MOUNTED');
     this.setInterval( () => {
       this.setState({
-        curTime : new Date().toLocaleString()
+				curTime : new Date().toTimeString().slice(0,8)
       })
     },3000)
 		this.props.routeTo(this.props.location.pathname);
-		this.props.getSections({token: this.props.token, user: this.props.user});
-  }
 
-	componentDidUnount() {
-	}
+		if(this.props.prof) {
+			this.props.getSections({token: this.props.token, user: this.props.user});
+		}
+		else {
+			this.props.getSectionsStudent({token: this.props.token, user: this.props.user});
+		}
+  }
 
 	shouldClassStart = (time, timeEnd) => {
 		const date = '01/01/2020';
+		console.log(time, timeEnd, this.state.curTime)
 		return (
 			Date.parse(`${date} ${time}`) <= Date.parse(`${date} ${this.state.curTime}`)
 				&&
@@ -77,6 +81,7 @@ class DashBoard extends Component {
 						classCode={section.course_info.course_id}
 						sectionId={section.section_id}
 						shouldClassStart={this.shouldClassStart(section.class_time, section.class_time_end)}
+						isStudent={!this.props.prof}
 					/>
 				)
 			});

@@ -30,9 +30,12 @@ import styles from './styles';
 class Settings extends Component {
 
   componentDidMount() {
-		console.log(this);
 		this.props.routeTo(this.props.location.pathname);
   }
+
+	_logout = () => {
+		this.props.logout();
+	}
 
   render() {
     return (
@@ -48,6 +51,14 @@ class Settings extends Component {
 						</Body>
 						<Right />
 					</Header>
+					<Container>
+						<Button 
+							black
+							onPress={this._logout}
+						>
+							<Text style={styles.copyText}>LOGOUT</Text>
+						</Button>
+					</Container>
         </View>
     );
   }

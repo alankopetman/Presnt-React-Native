@@ -3,6 +3,7 @@ import Registration from './Registration';
 import DashBoard from './DashBoard';
 import Courses from './Courses';
 import Settings from './Settings';
+import Roster from './Roster';
 
 
 export {
@@ -11,4 +12,5 @@ export {
   DashBoard,
 	Courses,
 	Settings,
+	Roster,
 };

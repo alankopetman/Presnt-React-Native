@@ -12,7 +12,6 @@ const axiosInstance = axios.create({
 export function register(firstName, lastName, pid, email, password, passwordConf) {
   return (dispatch, getState) => {
 		const re = new RegExp('\(.*\)@.*');
-    console.log(getState());
 		axiosInstance.post('/api/auth/v2/registration/', {
 			username: email.replace(re, '$1'),
 			email: email,
@@ -54,15 +53,13 @@ export function loginRequest(email, password) {
   return (dispatch, getState) => {
 		const re = new RegExp('\(.*\)@.*');
 		const username = email.replace(re, '$1');
-		console.log(username);
-    axiosInstance.post('/api/auth/v2/login', {
+		axiosInstance.post('/api/auth/v2/login/', {
 			username: username,
 			email: email,
       password: password,
     })
     .then((response) => {
 			const { data } = response;
-			console.log(response);
 			if(response.status < 400) {
 				dispatch(
 					loginSuccess({ 
@@ -88,11 +85,12 @@ export function loginRequest(email, password) {
   }
 }
 
-export function loginSuccess({token, user}) {
+export function loginSuccess({token, user, prof}) {
   return {
     type: types.LOGIN.SUCCESS,
     token,
     user,
+		prof,
   }
 }
 
@@ -116,7 +114,13 @@ export function registrationFailure({email, password, pid, other}) {
 }
 
 export function logout() {
+	const user = undefined;
+	const token = undefined;
+	const prof = false;
   return {
-    type: types.LOGOUT,
+		type: types.LOGIN.SUCCESS,
+		user, 
+		token,
+		prof,
   }
 }

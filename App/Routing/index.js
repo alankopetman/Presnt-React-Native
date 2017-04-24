@@ -23,6 +23,7 @@ import {
   DashBoard,
 	Courses,
 	Settings,
+	Roster,
 } from '../Components';
 import { AppHeader } from '../Resources';
 import styles from './styles';
@@ -38,11 +39,9 @@ class Router extends React.Component {
   }
 
 	componentDidMount(){
-    console.log(this);
 	}
 
 	componentWillUnmount() {
-    console.log(this.props);
 	}
 
 	setActive = (path, activeIcon, inactiveIcon) => {
@@ -62,6 +61,12 @@ class Router extends React.Component {
 								{...this.props}
 							/>
 
+							<Route 
+								path="/section/:id"
+								component={Roster}
+								{...this.props}
+							/>
+								
 							<Route
 								exact path="/dashboard"
 								component={DashBoard}

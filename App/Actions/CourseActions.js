@@ -9,10 +9,38 @@ const axiosInstance = axios.create({
 	}
 });
 
+export function sectionRegister(auth, code) {
+	const {user, token } = auth;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
+	return (dispatch, getState) => {
+		axiosInstance.post('/api/sections/register/', {
+			access_code: code,
+		})
+		.then((response) => {
+			if(response.status < 600) {
+				dispatch(
+					getSectionsStudent({ 
+						user: user,
+						token: token,
+					})
+				)
+			} else {
+				dispatch(
+						sectionFailure({
+							data: response.data,
+					})
+				)
+			}
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+}
+
 export function deleteSection(auth, sectionId) {
 	const { user, token } = auth;
 	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
-	console.log(axiosInstance.defaults.headers.common['Authorization'])
 	return (dispatch, getState) => {
 		axiosInstance.delete(`/api/sections/${sectionId}/`)
 		.then((response) => {
@@ -41,9 +69,7 @@ export function deleteSection(auth, sectionId) {
 export function createSection(auth, section) {
 	const { user, token } = auth;
 	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
-	console.log(axiosInstance.defaults.headers.common['Authorization'])
   return (dispatch, getState) => {
-    console.log(getState());
 		axiosInstance.post('/api/sections/', {
 			class_day_one: section.firstDay,
 			class_day_two: section.secondDay,
@@ -81,14 +107,35 @@ export function createSection(auth, section) {
   }
 }
 
+export function getSectionsStudent(auth) {
+	const { token, user } = auth;
+	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
+	return (dispatch, getState) => {
+		axiosInstance.get('/api/sections/get_sections_student/')
+		.then((response) => {
+			if(response.status < 400) {
+				dispatch(
+					sectionSuccess({
+						sections: response.data,
+					})
+				)
+			} else {
+				dispatch(
+					sectionFailure({
+						data: data,
+					})
+				)
+			}
+		})
+	}
+}
+
 export function getSections(auth) {
 	const { token, user } = auth;
 	axiosInstance.defaults.headers.common['Authorization'] = `Token ${token}`;
-	console.log(axiosInstance.defaults.headers.common['Authorization'])
 	return (dispatch, getState) => {
 		axiosInstance.get('/api/sections/get_sections/')
 		.then((response) => {
-			console.log(response)
 			if(response.status < 400) {
 				dispatch(
 					sectionSuccess({
@@ -113,7 +160,6 @@ export function getCourses(auth) {
 		axiosInstance.get(
 			'/api/courses/'
 		).then((response) => {
-			console.log("COURSES GET", response);
 			dispatch(
 				courseSuccess({
 					courses: response.data,
@@ -122,6 +168,7 @@ export function getCourses(auth) {
 		});
 	}
 }
+
 
 export function courseSuccess({ courses }) {
   return {

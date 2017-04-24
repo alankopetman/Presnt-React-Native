@@ -8,44 +8,58 @@ import {
 	TouchableOpacity,
 	Alert,
 } from 'react-native';
+import {
+	Link,
+} from 'react-router-native';
 
 import {baseStyles, colors, icons} from '../Styles';
 
-function ClassBar(props) {
-  return (
-    <View style={styles.container}>
-			<TouchableOpacity style={styles.container}>
-				<View style={styles.courseLeftContainer}>
-					<Text style={styles.courseLeftTextTop}>
-						{props.classCode}&nbsp;{props.sectionId}
-					</Text>
-					<Text style={styles.courseLeftTextBottom}>
-						Class Size <Text style={styles.sizeText}> {props.classSize} </Text>
-					</Text>
-				</View>
-				<View style={styles.courseRightContainer}>
-					<View style={styles.courseTextContainer}>
-						<Text style={styles.courseRightText}>{props.classDayOne} | {props.classDayTwo}</Text>
-						<Text style={styles.courseRightText, styles.sizeText}>11:00 AM - 12:15 PM</Text>
+class ClassBar extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return (
+			<View style={styles.container}>
+				<TouchableOpacity style={styles.container}>
+					<Link
+						to={`/section/${this.props.sid}`}
+						key={this.props.sid}
+						component={TouchableOpacity}
+					>
+					<View style={styles.courseLeftContainer}>
+							<Text style={styles.courseLeftTextTop}>
+								{this.props.classCode}&nbsp;{this.props.sectionId}
+							</Text>
+						<Text style={styles.courseLeftTextBottom}>
+							Class Size <Text style={styles.sizeText}> {this.props.classSize} </Text>
+						</Text>
 					</View>
-					{props.editMode ? 
-					(<TouchableOpacity
-						onPress={() => Alert.alert(
-							'Are you sure?',
-							'Delete section',
-							[
-								{ text: 'Cancel', onPress: () => console.log('canceled') },
-								{ text: 'Delete', onPress: () => {
-								props.deleteSection(props.sid)} }
-							]
-						)}
-						style={styles.editting}>
-						{icons.remove}
-					</TouchableOpacity>) : (<View />)}
-				</View>
-			</TouchableOpacity>
-    </View>
-)}
+				</Link>
+					<View style={styles.courseRightContainer}>
+						<View style={styles.courseTextContainer}>
+							<Text style={styles.courseRightText}>{this.props.classDayOne} | {this.props.classDayTwo}</Text>
+							<Text style={styles.courseRightText, styles.sizeText}>11:00 AM - 12:15 PM</Text>
+						</View>
+						{this.props.editMode ? 
+						(<TouchableOpacity
+							onPress={() => Alert.alert(
+								'Are you sure?',
+								'Delete section',
+								[
+									{ text: 'Cancel', onPress: () => console.log('canceled') },
+									{ text: 'Delete', onPress: () => {
+									this.props.deleteSection(this.props.sid)} }
+								]
+							)}
+							style={styles.editting}>
+							{icons.remove}
+						</TouchableOpacity>) : (<View />)}
+					</View>
+				</TouchableOpacity>
+			</View>
+		)}
+	}
 export default ClassBar;
 
 const styles = StyleSheet.create({

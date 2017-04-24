@@ -39,6 +39,7 @@ class Courses extends Component {
 		this.state = {
 			active: true,
 			isModalVisible: false,
+			isStudentModalVisible: false,
 			editting: false,
 			firstDay: '',
 			secondDay: '',
@@ -49,6 +50,7 @@ class Courses extends Component {
 			sectionId: '',
 			roomNumber: 0,
 			course: 1,
+			code: '',
 		};
 	}
 
@@ -56,7 +58,12 @@ class Courses extends Component {
 		console.log(this);
 		this.props.routeTo(this.props.location.pathname);
 		this.props.getCourses({token: this.props.token, user: this.props.user});
-		this.props.getSections({token: this.props.token, user: this.props.user});
+		if(this.props.prof) {
+			this.props.getSections({token: this.props.token, user: this.props.user});
+		}
+		else {
+			this.props.getSectionsStudent({token: this.props.token, user: this.props.user});
+		}
   }
 
 	_showModal = () => {
@@ -65,6 +72,14 @@ class Courses extends Component {
 
 	_hideModal = () => {
 		this.setState({ isModalVisible: false });
+	}
+
+	_showStudentModal = () => {
+		this.setState({ isStudentModalVisible: true });
+	}
+
+	_hideStudentModal = () => {
+		this.setState({ isStudentModalVisible: false });
 	}
 
 	_onValueChange = (course) => {
@@ -77,6 +92,11 @@ class Courses extends Component {
 
 	_setTimeEnd = (classTimeEnd) => {
 		this.setState({classTimeEnd})
+	}
+
+	_register = () => {
+		const auth = {token: this.props.token, user: this.props.user};
+		this.props.sectionRegister(auth, this.state.code);
 	}
 
 	_createSection = ({active, isModalVisible, ...rest}) => {
@@ -121,22 +141,68 @@ class Courses extends Component {
 							<Title style={{color: 'white'}}>Courses</Title>
 						</Body>
 						<Right>
-							<Button 
-								transparent
-								onPress={() =>{
-								this.state.editting ? 
-									this.setState({editting: false}) : this.setState({editting: true});
-								}}
-							>
-								<Text 
-									style={this.state.editting ? styles.editting : styles.notEditting}
-								> {this.state.editting ? "Done" : "Edit"}</Text>
-							</Button>
+							{this.props.prof ?
+								(<Button 
+									transparent
+									onPress={() =>{
+									this.state.editting ? 
+										this.setState({editting: false}) : this.setState({editting: true});
+									}}
+								>
+									<Text 
+										style={this.state.editting ? styles.editting : styles.notEditting}
+									> {this.state.editting ? "Done" : "Edit"}</Text>
+								</Button>) :
+								(<Button 
+									transparent
+									onPress={this._showStudentModal}
+								>
+									<Text style={styles.notEditting}>Register</Text>
+								</Button>)}
 						</Right>
 					</Header>
 					<ScrollView contentContainerStyle={styles.scrollStyles}>
 						{Sections}
 					</ScrollView>
+						<Modal 
+							style={styles.modal} 
+							visible={this.state.isStudentModalVisible}
+							animationType={"slide"}
+						>
+								 <StatusBar barStyle="dark-content" />
+						<Header>
+							<Left>
+								<Button
+									onPress={this._hideStudentModal}
+									transparent
+								>
+									<Text style={styles.modalText}>Cancel</Text>
+								</Button>
+							</Left>
+							<Body>
+								<Title>Register</Title>
+							</Body>
+							<Right>
+								<Button 
+									transparent
+									onPress={() =>{
+									this._register()
+									this._hideModal()
+									}}
+								>
+									<Text style={styles.modalText}>Submit</Text>
+								</Button>
+							</Right>
+						</Header>
+								<Form>
+									<Item last>
+										<Input 
+											placeholder="Enter Class Code" 
+											onChangeText={(code) => this.setState({code})}
+										/>
+									</Item>
+								</Form>
+						</Modal>
 						<Modal 
 							style={styles.modal} 
 							visible={this.state.isModalVisible}

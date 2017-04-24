@@ -20,9 +20,13 @@ function Label(props) {
 			<View style={styles.rightContainer}>
 				<Text style={styles.text}>7:00 AM - 8:15 AM</Text>
 				{props.shouldClassStart ? 
+				(props.isStudent ? 
+				(<TouchableOpacity style={styles.downArrow}>
+					<Text style={styles.startText}> Presnt </Text>
+				</TouchableOpacity>) :
 				(<TouchableOpacity style={styles.downArrow}>
 					<Text style={styles.startText}> Start </Text>
-				</TouchableOpacity>) : (<View />)}
+				</TouchableOpacity>)) : (<View />)}
 			</View>
     </View>
 )}
