@@ -48,6 +48,7 @@ const baseStyles = StyleSheet.create({
 });
 
 const icons = {
+	back : (<Icon name="ios-arrow-back" size={30} color={colors.modal} />),
 	rightArrow : (<Icon name="ios-arrow-forward" size={40} color={colors.light} />),
 	leftArrow : (<Icon name="ios-arrow-back" size={40} color={colors.light} />),
 	downArrow : (<Icon name="ios-arrow-down" size={20} color={colors.light} />),

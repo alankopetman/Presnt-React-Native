@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import {baseStyles, colors, icons} from '../Styles';
+import formatTime from '../lib/time';
 
 function Label(props) {
 	console.log(props);
@@ -18,7 +19,7 @@ function Label(props) {
 				<Text style={styles.text}>{props.classCode}  {props.sectionId}</Text>
 			</View>
 			<View style={styles.rightContainer}>
-				<Text style={styles.text}>7:00 AM - 8:15 AM</Text>
+				<Text style={styles.text}>{formatTime(props.startTime)} - {formatTime(props.endTime)}</Text>
 				{props.shouldClassStart ? 
 				(props.isStudent ? 
 				(<TouchableOpacity style={styles.downArrow}>

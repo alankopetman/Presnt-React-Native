@@ -32,6 +32,7 @@ class Login extends Component {
   }
 
 	componentDidMount(){
+		this.props.loginRequest('mross@fiu.edu', 'pass1234');
 	}
 
 	componentWillReceiveProps(nextProps){

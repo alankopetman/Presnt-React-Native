@@ -81,6 +81,8 @@ class DashBoard extends Component {
 						classCode={section.course_info.course_id}
 						sectionId={section.section_id}
 						shouldClassStart={this.shouldClassStart(section.class_time, section.class_time_end)}
+						startTime={section.class_time}
+						endTime={section.class_time_end}
 						isStudent={!this.props.prof}
 					/>
 				)

@@ -13,6 +13,7 @@ import {
 } from 'react-router-native';
 
 import {baseStyles, colors, icons} from '../Styles';
+import formatTime from '../lib/time';
 
 class ClassBar extends React.Component {
 	constructor(props) {
@@ -39,7 +40,7 @@ class ClassBar extends React.Component {
 					<View style={styles.courseRightContainer}>
 						<View style={styles.courseTextContainer}>
 							<Text style={styles.courseRightText}>{this.props.classDayOne} | {this.props.classDayTwo}</Text>
-							<Text style={styles.courseRightText, styles.sizeText}>11:00 AM - 12:15 PM</Text>
+							<Text style={styles.courseRightText, styles.sizeText}>{formatTime(this.props.startTime)} - {formatTime(this.props.endTime)}</Text>
 						</View>
 						{this.props.editMode ? 
 						(<TouchableOpacity

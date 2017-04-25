@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "moment": "^2.18.1",
     "native-base": "^2.1.2",
     "react": "^16.0.0-alpha.6",
     "react-mixin": "^2.0.2",
@@ -14,6 +15,7 @@
     "react-native-action-button": "^2.6.9",
     "react-native-animatable": "^1.1.1",
     "react-native-animated-modal": "^1.1.0",
+    "react-native-background-geolocation": "^2.7.0",
     "react-native-clipboard": "0.0.5",
     "react-native-datepicker": "^1.4.7",
     "react-native-redux-router": "^1.0.7",

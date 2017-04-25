@@ -123,6 +123,8 @@ class Courses extends Component {
 						classDayOne={section.class_day_one}
 						classDayTwo={section.class_day_two}
 						sectionId={section.section_id}
+						startTime={section.class_time}
+						endTime={section.class_time_end}
 						sid={section.id}
 						editMode={this.state.editting}
 						deleteSection={this._deleteSection}
