@@ -15,6 +15,7 @@
     "react-native-action-button": "^2.6.9",
     "react-native-animatable": "^1.1.1",
     "react-native-animated-modal": "^1.1.0",
+    "react-native-axios": "^0.17.1",
     "react-native-background-geolocation": "^2.7.0",
     "react-native-clipboard": "0.0.5",
     "react-native-datepicker": "^1.4.7",
